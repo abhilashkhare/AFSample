@@ -13,8 +13,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Alamofire.request("https://codewithchris.com/code/afsample.json").responseJSON { (response) in
-            print(response.result.value)
+        Alamofire.request("https://codewithchris.com/code/afsample.json", method: .get).responseJSON { (response) in
+            if let JSON = response.result.value as? [String : Any] {
+                print(JSON["firstkey"] as! String)
+                print(JSON["secondkey"] as! [String])
+            }
         }
     }
 
